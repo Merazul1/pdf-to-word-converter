@@ -7,6 +7,7 @@ import { TextPreviewModal } from './components/TextPreviewModal';
 import { FeaturesSection } from './components/FeaturesSection';
 import { HowItWorksSection } from './components/HowItWorksSection';
 import { ComparisonSection } from './components/ComparisonSection';
+import { SeoContentSection } from './components/SeoContentSection';
 import { FaqSection } from './components/FaqSection';
 import { Footer } from './components/Footer';
 import {
@@ -299,6 +300,7 @@ export const App: React.FC = () => {
         <HowItWorksSection />
         <FeaturesSection />
         <ComparisonSection />
+        <SeoContentSection />
         <FaqSection />
       </main>
 

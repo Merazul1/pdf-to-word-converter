@@ -1,11 +1,15 @@
-# DocuShift - Free Online PDF to Word Converter
+# PDFtoWordFree.org - Free Online PDF to Word Converter
 
-DocuShift is a modern, fast, and completely free online PDF to Word (DOCX) conversion web application built with React, TypeScript, Tailwind CSS, Mozilla PDF.js, and the docx engine.
+**PDFtoWordFree.org** is a fast, accurate, and 100% free online PDF to Word (DOCX) conversion website built with React, TypeScript, Tailwind CSS, Mozilla PDF.js, and the docx engine.
+
+Domain: **[https://pdftowordfree.org](https://pdftowordfree.org)**
+
+---
 
 ## 🚀 Key Features
 
 - **100% Free & Unlimited**: No subscriptions, no hidden limits, no registration, and no watermarks.
-- **Client-Side Privacy Guarantee**: All file reading, text extraction, layout parsing, and Word generation happens strictly in your browser. Sensitive documents never leave your computer.
+- **Client-Side Privacy Guarantee**: All file reading, text extraction, layout parsing, and Word generation happens strictly in the user's browser. Sensitive documents never leave the computer.
 - **High-Fidelity DOCX Output**: Generates native Microsoft Word (`.docx`) files with preserved headings (H1, H2, H3), paragraphs, line spacing, bold/italic font styling, and multi-column tables.
 - **Batch PDF Conversion**: Convert multiple PDF documents simultaneously and download all results individually or together in a single ZIP archive.
 - **Page Range Selector**: Choose to convert all pages or target specific page ranges (e.g. `1-3, 5`).
@@ -29,7 +33,6 @@ DocuShift is a modern, fast, and completely free online PDF to Word (DOCX) conve
 ## 💻 Getting Started
 
 ### 1. Install Dependencies
-Run the following command in the project directory:
 ```bash
 npm install
 ```
@@ -38,20 +41,20 @@ npm install
 ```bash
 npm run dev
 ```
-Open your browser at `http://localhost:3000` (or the port Vite provides) to start using the converter.
+Open your browser at `http://localhost:3000` to test the converter.
 
 ### 3. Build for Production
 ```bash
 npm run build
 ```
-The output will be created in the `dist` folder, ready for deployment to any static hosting service (Vercel, Netlify, Cloudflare Pages, GitHub Pages, or an Nginx/Apache server).
+The optimized production build will be saved in the `dist` folder.
 
 ---
 
-## 🔒 Security & Privacy
+## 🌐 Deploying to `pdftowordfree.org`
 
-Traditional converters send your files across the internet to third-party cloud servers. DocuShift's in-browser conversion engine ensures that:
-1. Files are loaded directly into browser memory.
-2. Layout and text items are analyzed via PDF.js worker.
-3. The Word (.docx) file is packed locally and saved using client-side Blob APIs.
-4. No network requests contain your document data.
+Since PDFtoWordFree is a client-side high-performance static web application, it can be deployed for **free** on:
+- **Cloudflare Pages** (Connect repository or upload `dist/`, link custom domain `pdftowordfree.org`)
+- **Vercel** (`vercel --prod` or link GitHub repo)
+- **Netlify** (Drag and drop `dist/` folder or link GitHub repo)
+- **Any VPS / cPanel / Apache / Nginx** web hosting

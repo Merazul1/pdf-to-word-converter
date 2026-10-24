@@ -256,7 +256,7 @@ export async function convertPdfToDocx(
   // Create DOCX document with standard margins (1 inch / 1440 dxa)
   const doc = new Document({
     title: file.name.replace(/\.[^/.]+$/, ''),
-    description: 'Converted from PDF by DocuShift',
+    description: 'Converted from PDF by pdftowordfree.org',
     sections: [
       {
         properties: {

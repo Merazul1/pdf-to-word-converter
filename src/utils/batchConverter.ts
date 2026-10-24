@@ -30,7 +30,7 @@ export async function downloadAllAsZip(items: FileQueueItem[]): Promise<void> {
   });
 
   const content = await zip.generateAsync({ type: 'blob' });
-  saveAs(content, 'DocuShift_Converted_Word_Documents.zip');
+  saveAs(content, 'PDFtoWordFree_Converted_Documents.zip');
 }
 
 /**
@@ -54,7 +54,7 @@ stream
 BT
 /F1 22 Tf
 54 720 Td
-(DocuShift Sample PDF Document) Tj
+(PDFtoWordFree.org Sample Document) Tj
 /F2 14 Tf
 0 -36 Td
 (Instant PDF to Word Conversion Test) Tj
@@ -102,5 +102,5 @@ startxref
 %%EOF`;
 
   const blob = new Blob([samplePdfContent], { type: 'application/pdf' });
-  return new File([blob], 'Sample_DocuShift_Document.pdf', { type: 'application/pdf' });
+  return new File([blob], 'Sample_PDFtoWordFree_Document.pdf', { type: 'application/pdf' });
 }

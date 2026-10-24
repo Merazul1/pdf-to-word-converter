@@ -49,10 +49,10 @@ export const FeaturesSection: React.FC = () => {
             Engineered For Excellence
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-            Why Choose DocuShift For PDF to Word?
+            Why Choose PDFtoWordFree For PDF to Word?
           </h2>
           <p className="mt-4 text-base sm:text-lg text-slate-600 dark:text-slate-400">
-            Traditional online converters upload your personal documents to unknown remote servers. DocuShift does the heavy lifting client-side with maximum security and precision.
+            Traditional online converters upload your personal documents to unknown remote servers. PDFtoWordFree does all parsing client-side with maximum security, speed, and precision.
           </p>
         </div>
 

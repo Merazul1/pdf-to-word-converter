@@ -1,5 +1,5 @@
 import React from 'react';
-import { FileText, Heart, ShieldCheck } from 'lucide-react';
+import { FileText, ShieldCheck } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   return (
@@ -13,7 +13,8 @@ export const Footer: React.FC = () => {
             </div>
             <div>
               <span className="font-bold text-lg text-slate-900 dark:text-white">
-                Docu<span className="text-blue-600 dark:text-blue-400">Shift</span>
+                PDF<span className="text-blue-600 dark:text-blue-400">toWord</span>Free
+                <span className="text-xs text-slate-400 font-normal ml-1">.org</span>
               </span>
               <p className="text-xs text-slate-500 dark:text-slate-400">
                 100% Free & Private Online PDF to Word Converter
@@ -29,7 +30,7 @@ export const Footer: React.FC = () => {
 
           {/* Copyright */}
           <div className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1">
-            <span>Built with precision for fast document editing.</span>
+            <span>© {new Date().getFullYear()} pdftowordfree.org • Free Document Tools</span>
           </div>
         </div>
       </div>

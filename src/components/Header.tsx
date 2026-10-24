@@ -1,5 +1,5 @@
 import React from 'react';
-import { FileText, Moon, Sun, ShieldCheck, Sparkles } from 'lucide-react';
+import { FileText, Moon, Sun, ShieldCheck } from 'lucide-react';
 
 interface HeaderProps {
   isDarkMode: boolean;
@@ -11,26 +11,26 @@ export const Header: React.FC<HeaderProps> = ({ isDarkMode, toggleTheme }) => {
     <header className="sticky top-0 z-40 w-full border-b border-slate-200/80 dark:border-slate-800/80 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Brand Logo */}
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-blue-500 flex items-center justify-center shadow-md shadow-blue-500/20 text-white">
+        <a href="/" className="flex items-center gap-3 group">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-blue-500 flex items-center justify-center shadow-md shadow-blue-500/20 text-white group-hover:scale-105 transition-transform">
             <FileText className="w-5 h-5" />
           </div>
           <div>
             <div className="flex items-center gap-2">
               <span className="font-bold text-xl tracking-tight text-slate-900 dark:text-white">
-                Docu<span className="text-blue-600 dark:text-blue-400">Shift</span>
+                PDF<span className="text-blue-600 dark:text-blue-400">toWord</span>Free
               </span>
-              <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300 border border-blue-200 dark:border-blue-800">
-                DOCX 2.0
+              <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
+                .org
               </span>
             </div>
             <p className="text-[11px] text-slate-500 dark:text-slate-400 hidden sm:block">
-              Free Online PDF to Word Converter
+              100% Free Online PDF to Word Converter
             </p>
           </div>
-        </div>
+        </a>
 
-        {/* Navigation & Trust Indicator */}
+        {/* Navigation */}
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600 dark:text-slate-300">
           <a href="#converter" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
             Converter
@@ -40,6 +40,9 @@ export const Header: React.FC<HeaderProps> = ({ isDarkMode, toggleTheme }) => {
           </a>
           <a href="#features" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
             Features
+          </a>
+          <a href="#guide" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+            Guide
           </a>
           <a href="#faq" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
             FAQ

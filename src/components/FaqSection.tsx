@@ -16,7 +16,7 @@ export const FaqSection: React.FC = () => {
     },
     {
       q: 'Are my confidential documents safe and private?',
-      a: 'DocuShift operates with a zero-server privacy architecture. Your PDF files are read and converted directly within your browser’s local memory using client-side WebAssembly and JavaScript. No document data is ever uploaded to or stored on any external server.',
+      a: 'PDFtoWordFree operates with a strict zero-server privacy architecture. Your PDF files are read and converted directly within your browser’s local memory using client-side WebAssembly and JavaScript. No document data is ever uploaded to or stored on any external server.',
     },
     {
       q: 'What format does it produce and can I edit it?',
