@@ -31,7 +31,7 @@
       ]
     },
     {
-      "source": "/(robots.txt|sitemap.xml|manifest.json)",
+      "source": "/(robots.txt|sitemap.xml|manifest.json|ads.txt)",
       "headers": [
         {
           "key": "Cache-Control",
