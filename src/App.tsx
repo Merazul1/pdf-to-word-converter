@@ -8,6 +8,8 @@ import { FeaturesSection } from './components/FeaturesSection';
 import { HowItWorksSection } from './components/HowItWorksSection';
 import { ComparisonSection } from './components/ComparisonSection';
 import { SeoContentSection } from './components/SeoContentSection';
+import { DocxPageContent } from './components/DocxPageContent';
+import { ScannedPageContent } from './components/ScannedPageContent';
 import { FaqSection } from './components/FaqSection';
 import { Footer } from './components/Footer';
 import {
@@ -31,6 +33,12 @@ import {
 } from 'lucide-react';
 
 export const App: React.FC = () => {
+  // Path & Routing state
+  const [currentPath, setCurrentPath] = useState<string>(() => {
+    const p = window.location.pathname.replace(/\/$/, '') || '/';
+    return p === '/pdf-to-docx' || p === '/scanned-pdf-to-word' ? p : '/';
+  });
+
   // Theme state
   const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
     const saved = localStorage.getItem('theme');
@@ -41,7 +49,6 @@ export const App: React.FC = () => {
   // Conversion queue
   const [queue, setQueue] = useState<FileQueueItem[]>([]);
   const [previewItem, setPreviewItem] = useState<FileQueueItem | null>(null);
-  const [isDragOverWindow, setIsDragOverWindow] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   // Sync dark class to <html>
@@ -54,6 +61,53 @@ export const App: React.FC = () => {
       localStorage.setItem('theme', 'light');
     }
   }, [isDarkMode]);
+
+  // Handle client-side navigation and update SEO meta tags dynamically
+  const handleNavigate = (path: string) => {
+    window.history.pushState({}, '', path);
+    setCurrentPath(path);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    const handlePopState = () => {
+      const p = window.location.pathname.replace(/\/$/, '') || '/';
+      setCurrentPath(p === '/pdf-to-docx' || p === '/scanned-pdf-to-word' ? p : '/');
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  // Sync dynamic Title, Meta Description, and Canonical URL
+  useEffect(() => {
+    let title = 'Convert PDF to Word Free (100% In-Browser & Private) - PDFtoWordFree.org';
+    let description = 'Convert PDF to Word free online at pdftowordfree.org. No email, no registration, 100% private in-browser conversion with instant editable Word (DOCX) download.';
+    let canonical = 'https://www.pdftowordfree.org/';
+
+    if (currentPath === '/pdf-to-docx') {
+      title = 'Convert PDF to DOCX Free (100% In-Browser & Instant) - PDFtoWordFree.org';
+      description = 'Convert PDF to DOCX free online at pdftowordfree.org. Fast, high accuracy layout preservation, 100% in-browser privacy with zero server uploads.';
+      canonical = 'https://www.pdftowordfree.org/pdf-to-docx';
+    } else if (currentPath === '/scanned-pdf-to-word') {
+      title = 'Convert Scanned PDF to Word (DOCX) Free Online - PDFtoWordFree.org';
+      description = 'Convert scanned PDF to Word DOCX free online. Extract selectable and editable text, tables, and headings from scanned documents and images with zero uploads.';
+      canonical = 'https://www.pdftowordfree.org/scanned-pdf-to-word';
+    }
+
+    document.title = title;
+
+    // Update meta description
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute('content', description);
+    }
+
+    // Update canonical link
+    const canonicalLink = document.querySelector('link[rel="canonical"]');
+    if (canonicalLink) {
+      canonicalLink.setAttribute('href', canonical);
+    }
+  }, [currentPath]);
 
   const toggleTheme = () => setIsDarkMode((prev) => !prev);
 
@@ -86,7 +140,6 @@ export const App: React.FC = () => {
     setQueue((prev) => [...prev, ...newItems]);
     showToast(`Added ${newItems.length} PDF file${newItems.length > 1 ? 's' : ''} to queue.`);
 
-    // Asynchronously determine page counts in background
     for (const item of newItems) {
       try {
         const pages = await getPdfPageCount(item.file);
@@ -99,21 +152,18 @@ export const App: React.FC = () => {
     }
   }, []);
 
-  // Update selected pages for a file
   const handleUpdatePages = (id: string, range: string) => {
     setQueue((prev) =>
       prev.map((item) => (item.id === id ? { ...item, selectedPages: range } : item))
     );
   };
 
-  // Convert a single file
   const handleConvertSingle = async (id: string) => {
     const target = queue.find((item) => item.id === id);
     if (!target || target.status === 'completed') return;
 
     const startTime = performance.now();
 
-    // Set converting status
     setQueue((prev) =>
       prev.map((item) =>
         item.id === id
@@ -192,7 +242,6 @@ export const App: React.FC = () => {
     }
   };
 
-  // Convert all idle files
   const handleConvertAll = async () => {
     const idleItems = queue.filter((item) => item.status === 'idle');
     for (const item of idleItems) {
@@ -200,23 +249,19 @@ export const App: React.FC = () => {
     }
   };
 
-  // Remove file from queue
   const handleRemoveFile = (id: string) => {
     setQueue((prev) => prev.filter((item) => item.id !== id));
   };
 
-  // Clear all files
   const handleClearAll = () => {
     setQueue([]);
   };
 
-  // Load sample PDF
   const handleLoadSample = async () => {
     const sampleFile = await createSamplePdfFile();
     handleFilesSelected([sampleFile]);
   };
 
-  // Download all as ZIP
   const handleDownloadAllZip = () => {
     downloadAllAsZip(queue);
     showToast('Downloaded converted files ZIP archive.');
@@ -228,7 +273,12 @@ export const App: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors">
-      <Header isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
+      <Header
+        isDarkMode={isDarkMode}
+        toggleTheme={toggleTheme}
+        currentPath={currentPath}
+        onNavigate={handleNavigate}
+      />
 
       {/* Main Content Area */}
       <main className="flex-1">
@@ -238,24 +288,50 @@ export const App: React.FC = () => {
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-b from-blue-400/10 via-indigo-400/5 to-transparent blur-3xl pointer-events-none -z-10" />
 
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            {/* Title & Badge */}
+            {/* Dynamic Title & Badge per Sub-tool */}
             <div className="text-center mb-10">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-blue-950/70 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 text-xs sm:text-sm font-semibold mb-6 shadow-sm">
                 <Sparkles className="w-4 h-4 text-amber-500" />
                 <span>100% Free • Unlimited • No Registration</span>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.15]">
-                Convert <span className="text-red-500">PDF</span> to{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500">
-                  Word Online
-                </span>
-              </h1>
-
-              <p className="mt-5 text-base sm:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
-                Transform any PDF document into an editable Microsoft Word (DOCX) file with high accuracy.
-                Protected by 100% client-side privacy.
-              </p>
+              {currentPath === '/pdf-to-docx' ? (
+                <>
+                  <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.15]">
+                    Convert <span className="text-red-500">PDF</span> to{' '}
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500">
+                      DOCX Online
+                    </span>
+                  </h1>
+                  <p className="mt-5 text-base sm:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                    Convert any PDF into Microsoft Word Office OpenXML (.docx) format with high accuracy. 100% client-side privacy.
+                  </p>
+                </>
+              ) : currentPath === '/scanned-pdf-to-word' ? (
+                <>
+                  <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.15]">
+                    Convert <span className="text-purple-600 dark:text-purple-400">Scanned PDF</span> to{' '}
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500">
+                      Word (DOCX)
+                    </span>
+                  </h1>
+                  <p className="mt-5 text-base sm:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                    Extract selectable text, headings, and tables from scanned documents and images into editable Word files.
+                  </p>
+                </>
+              ) : (
+                <>
+                  <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.15]">
+                    Convert <span className="text-red-500">PDF</span> to{' '}
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500">
+                      Word Online
+                    </span>
+                  </h1>
+                  <p className="mt-5 text-base sm:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                    Transform any PDF document into an editable Microsoft Word (DOCX) file with high accuracy. Protected by 100% client-side privacy.
+                  </p>
+                </>
+              )}
             </div>
 
             {/* DropZone Section */}
@@ -296,15 +372,33 @@ export const App: React.FC = () => {
           </div>
         </section>
 
-        {/* Informative Sections */}
-        <HowItWorksSection />
-        <FeaturesSection />
-        <ComparisonSection />
-        <SeoContentSection />
-        <FaqSection />
+        {/* Informative Sub-tool Content Sections */}
+        {currentPath === '/pdf-to-docx' ? (
+          <>
+            <DocxPageContent />
+            <HowItWorksSection />
+            <ComparisonSection />
+            <FaqSection />
+          </>
+        ) : currentPath === '/scanned-pdf-to-word' ? (
+          <>
+            <ScannedPageContent />
+            <HowItWorksSection />
+            <FeaturesSection />
+            <FaqSection />
+          </>
+        ) : (
+          <>
+            <HowItWorksSection />
+            <FeaturesSection />
+            <ComparisonSection />
+            <SeoContentSection />
+            <FaqSection />
+          </>
+        )}
       </main>
 
-      <Footer />
+      <Footer onNavigate={handleNavigate} />
 
       {/* Extracted Text Preview Modal */}
       <TextPreviewModal
