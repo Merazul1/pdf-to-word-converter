@@ -80,16 +80,16 @@ export const App: React.FC = () => {
 
   // Sync dynamic Title, Meta Description, and Canonical URL
   useEffect(() => {
-    let title = 'Convert PDF to Word Free (100% In-Browser & Private) - PDFtoWordFree.org';
+    let title = 'Convert PDF to Word Free (100% Private) - PDFtoWordFree';
     let description = 'Convert PDF to Word free online at pdftowordfree.org. No email, no registration, 100% private in-browser conversion with instant editable Word (DOCX) download.';
     let canonical = 'https://www.pdftowordfree.org/';
 
     if (currentPath === '/pdf-to-docx') {
-      title = 'Convert PDF to DOCX Free (100% In-Browser & Instant) - PDFtoWordFree.org';
+      title = 'Convert PDF to DOCX Free (100% Private) - PDFtoWordFree';
       description = 'Convert PDF to DOCX free online at pdftowordfree.org. Fast, high accuracy layout preservation, 100% in-browser privacy with zero server uploads.';
       canonical = 'https://www.pdftowordfree.org/pdf-to-docx';
     } else if (currentPath === '/scanned-pdf-to-word') {
-      title = 'Convert Scanned PDF to Word (DOCX) Free Online - PDFtoWordFree.org';
+      title = 'Convert Scanned PDF to Word (OCR Free) - PDFtoWordFree';
       description = 'Convert scanned PDF to Word DOCX free online. Extract selectable and editable text, tables, and headings from scanned documents and images with zero uploads.';
       canonical = 'https://www.pdftowordfree.org/scanned-pdf-to-word';
     }
