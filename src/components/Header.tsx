@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FileText, Moon, Sun, ShieldCheck, ChevronDown, Menu, X, FileCode, ScanText, Sparkles } from 'lucide-react';
+import { FileText, Moon, Sun, ShieldCheck, ChevronDown, Menu, X, FileCode, ScanText, Sparkles, UserX } from 'lucide-react';
 
 interface HeaderProps {
   isDarkMode: boolean;
@@ -18,8 +18,9 @@ export const Header: React.FC<HeaderProps> = ({
 
   const tools = [
     { name: 'PDF to Word', path: '/', icon: FileText, desc: 'Convert PDF to editable Word document' },
+    { name: 'No Sign Up', path: '/pdf-to-word-no-sign-up', icon: UserX, desc: '100% Free with zero registration or email' },
     { name: 'PDF to DOCX', path: '/pdf-to-docx', icon: FileCode, desc: 'Standard Office OpenXML (.docx) format' },
-    { name: 'Scanned PDF (OCR)', path: '/scanned-pdf-to-word', icon: ScanText, desc: 'Extract text from scanned PDFs & images' },
+    { name: 'Scanned PDF', path: '/scanned-pdf-to-word', icon: ScanText, desc: 'Extract text from scanned PDFs & images' },
   ];
 
   const handleToolClick = (path: string) => {

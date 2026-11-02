@@ -16,6 +16,16 @@ const baseHtml = fs.readFileSync(templatePath, 'utf8');
 
 const subpages = [
   {
+    dir: 'pdf-to-word-no-sign-up',
+    title: 'PDF to Word Converter No Sign Up (100% Free) - PDFtoWordFree',
+    metaTitle: 'PDF to Word Converter No Sign Up (100% Free) - PDFtoWordFree',
+    description: 'Convert PDF to Word online with no sign up, no email, and no credit card required. Free instant in-browser DOCX conversion with 100% privacy.',
+    canonical: 'https://www.pdftowordfree.org/pdf-to-word-no-sign-up',
+    h1: 'PDF to Word Converter <span style="color: #059669;">No Sign Up</span> (100% Free)',
+    intro: 'Convert any PDF into editable Microsoft Word (DOCX) format with zero registration, no email address, and no subscription trials.',
+    bodyText: 'Most PDF converters force you into email registration or 7-day trials to sell subscriptions. PDFtoWordFree converts your documents locally in your browser memory — 100% private, sign-up free, and free forever.'
+  },
+  {
     dir: 'pdf-to-docx',
     title: 'Convert PDF to DOCX Free (100% Private) - PDFtoWordFree',
     metaTitle: 'Convert PDF to DOCX Free (100% Private) - PDFtoWordFree',

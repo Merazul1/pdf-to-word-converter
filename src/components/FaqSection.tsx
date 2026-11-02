@@ -11,6 +11,14 @@ export const FaqSection: React.FC = () => {
 
   const faqs: FaqItem[] = [
     {
+      q: 'Do I need to sign up, create an account, or enter my email?',
+      a: 'No! PDFtoWordFree.org requires absolutely no sign-up, no account registration, and no email address. You never have to worry about marketing spam or forgotten passwords — just open the site, convert your PDF, and download your editable Word document instantly.',
+    },
+    {
+      q: 'Is there a free trial period or payment required later?',
+      a: 'There is zero trial period and no subscription. Unlike other converters that give you a 7-day trial and then charge your credit card, PDFtoWordFree.org is genuinely 100% free with no credit card required and no daily file conversion caps.',
+    },
+    {
       q: 'Is this PDF to Word converter really 100% free?',
       a: 'Yes, completely free! There are no hidden fees, subscriptions, credits, daily limits, or watermarks added to your documents. You can convert as many PDFs as you need.',
     },

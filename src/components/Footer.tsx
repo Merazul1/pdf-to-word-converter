@@ -53,6 +53,15 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </li>
               <li>
                 <a
+                  href="/pdf-to-word-no-sign-up"
+                  onClick={(e) => handleLink(e, '/pdf-to-word-no-sign-up')}
+                  className="text-slate-500 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 transition-colors"
+                >
+                  PDF to Word (No Sign Up)
+                </a>
+              </li>
+              <li>
+                <a
                   href="/pdf-to-docx"
                   onClick={(e) => handleLink(e, '/pdf-to-docx')}
                   className="text-slate-500 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 transition-colors"
