@@ -11,6 +11,7 @@ import { SeoContentSection } from './components/SeoContentSection';
 import { DocxPageContent } from './components/DocxPageContent';
 import { ScannedPageContent } from './components/ScannedPageContent';
 import { NoSignUpPageContent } from './components/NoSignUpPageContent';
+import { SpanishPageContent } from './components/SpanishPageContent';
 import { FaqSection } from './components/FaqSection';
 import { Footer } from './components/Footer';
 import {
@@ -37,7 +38,7 @@ export const App: React.FC = () => {
   // Path & Routing state
   const [currentPath, setCurrentPath] = useState<string>(() => {
     const p = window.location.pathname.replace(/\/$/, '') || '/';
-    return p === '/pdf-to-docx' || p === '/scanned-pdf-to-word' || p === '/pdf-to-word-no-sign-up' ? p : '/';
+    return p === '/pdf-to-docx' || p === '/scanned-pdf-to-word' || p === '/pdf-to-word-no-sign-up' || p === '/es/convertir-pdf-a-word' ? p : '/';
   });
 
   // Theme state
@@ -73,7 +74,7 @@ export const App: React.FC = () => {
   useEffect(() => {
     const handlePopState = () => {
       const p = window.location.pathname.replace(/\/$/, '') || '/';
-      setCurrentPath(p === '/pdf-to-docx' || p === '/scanned-pdf-to-word' || p === '/pdf-to-word-no-sign-up' ? p : '/');
+      setCurrentPath(p === '/pdf-to-docx' || p === '/scanned-pdf-to-word' || p === '/pdf-to-word-no-sign-up' || p === '/es/convertir-pdf-a-word' ? p : '/');
     };
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
@@ -85,7 +86,11 @@ export const App: React.FC = () => {
     let description = 'Convert PDF to Word free online at pdftowordfree.org. No sign up, no email, no trial, 100% private in-browser conversion with instant editable Word (DOCX) download.';
     let canonical = 'https://www.pdftowordfree.org/';
 
-    if (currentPath === '/pdf-to-word-no-sign-up') {
+    if (currentPath === '/es/convertir-pdf-a-word') {
+      title = 'Convertir PDF a Word Gratis (Sin Registro) - PDFtoWordFree';
+      description = 'Convierte PDF a Word (DOCX) gratis online en pdftowordfree.org. Sin registro, sin email y 100% privado en tu navegador con descarga inmediata.';
+      canonical = 'https://www.pdftowordfree.org/es/convertir-pdf-a-word';
+    } else if (currentPath === '/pdf-to-word-no-sign-up') {
       title = 'PDF to Word Converter No Sign Up (100% Free) - PDFtoWordFree';
       description = 'Convert PDF to Word online with no sign up, no email, and no credit card required. Free instant in-browser DOCX conversion with 100% privacy.';
       canonical = 'https://www.pdftowordfree.org/pdf-to-word-no-sign-up';
@@ -300,7 +305,19 @@ export const App: React.FC = () => {
                 <span>100% Free • Unlimited • No Registration</span>
               </div>
 
-              {currentPath === '/pdf-to-word-no-sign-up' ? (
+              {currentPath === '/es/convertir-pdf-a-word' ? (
+                <>
+                  <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.15]">
+                    Convertir <span className="text-red-500">PDF</span> a{' '}
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500">
+                      Word Online Gratis
+                    </span>
+                  </h1>
+                  <p className="mt-5 text-base sm:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                    Convierte tus documentos PDF a archivos Word editables (DOCX) en segundos con total privacidad en el navegador. Sin registro ni límites.
+                  </p>
+                </>
+              ) : currentPath === '/pdf-to-word-no-sign-up' ? (
                 <>
                   <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.15]">
                     PDF to Word Converter <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-teal-600 to-blue-600">No Sign Up</span>
@@ -387,7 +404,9 @@ export const App: React.FC = () => {
         </section>
 
         {/* Informative Sub-tool Content Sections */}
-        {currentPath === '/pdf-to-word-no-sign-up' ? (
+        {currentPath === '/es/convertir-pdf-a-word' ? (
+          <SpanishPageContent />
+        ) : currentPath === '/pdf-to-word-no-sign-up' ? (
           <>
             <NoSignUpPageContent />
             <HowItWorksSection />

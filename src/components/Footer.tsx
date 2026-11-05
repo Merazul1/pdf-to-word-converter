@@ -78,6 +78,15 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   Scanned PDF to Word (OCR)
                 </a>
               </li>
+              <li>
+                <a
+                  href="/es/convertir-pdf-a-word"
+                  onClick={(e) => handleLink(e, '/es/convertir-pdf-a-word')}
+                  className="text-slate-500 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 transition-colors"
+                >
+                  Convertir PDF a Word (Español)
+                </a>
+              </li>
             </ul>
           </div>
 

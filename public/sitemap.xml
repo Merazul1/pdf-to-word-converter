@@ -23,7 +23,13 @@
   </url>
   <url>
     <loc>https://www.pdftowordfree.org/scanned-pdf-to-word</loc>
-    <lastmod>2026-11-02</lastmod>
+    <lastmod>2026-11-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://www.pdftowordfree.org/es/convertir-pdf-a-word</loc>
+    <lastmod>2026-11-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.95</priority>
   </url>

@@ -45,6 +45,17 @@ const subpages = [
     intro: 'Extract selectable, editable text, headings, and tabular data from scanned paper documents, receipts, contracts, and image-based PDFs.',
     bodyText: 'Scanned PDFs often wrap document images in a container without selectable text. PDFtoWordFree extracts font coordinates and text baselines embedded by scanners, converting them into editable Word paragraphs with 100% confidentiality.'
   },
+  {
+    dir: 'es/convertir-pdf-a-word',
+    lang: 'es',
+    title: 'Convertir PDF a Word Gratis (Sin Registro) - PDFtoWordFree',
+    metaTitle: 'Convertir PDF a Word Gratis (Sin Registro) - PDFtoWordFree',
+    description: 'Convierte PDF a Word (DOCX) gratis online en pdftowordfree.org. Sin registro, sin email y 100% privado en tu navegador con descarga inmediata.',
+    canonical: 'https://www.pdftowordfree.org/es/convertir-pdf-a-word',
+    h1: 'Convertir <span style="color: #ef4444;">PDF</span> a <span style="color: #2563eb;">Word Online Gratis</span>',
+    intro: 'Convierte tus documentos PDF a archivos Word editables (DOCX) en segundos con total privacidad en el navegador. Sin registro ni límites.',
+    bodyText: 'Conversor de PDF a Word gratis, rápido y 100% seguro. Convierte documentos PDF a formato Microsoft Word (.docx) editable directamente desde tu navegador sin instalar programas y sin subir archivos a servidores externos.'
+  },
 ];
 
 for (const page of subpages) {
@@ -54,6 +65,11 @@ for (const page of subpages) {
   }
 
   let html = baseHtml;
+
+  // Replace lang if specified
+  if (page.lang) {
+    html = html.replace(/<html lang="en">/i, `<html lang="${page.lang}">`);
+  }
 
   // Replace Title
   html = html.replace(/<title>.*?<\/title>/i, `<title>${page.title}</title>`);
