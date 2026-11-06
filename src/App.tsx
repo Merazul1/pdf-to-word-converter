@@ -14,6 +14,10 @@ import { NoSignUpPageContent } from './components/NoSignUpPageContent';
 import { SpanishPageContent } from './components/SpanishPageContent';
 import { FaqSection } from './components/FaqSection';
 import { Footer } from './components/Footer';
+import { PrivacyPolicy } from './components/PrivacyPolicy';
+import { TermsOfService } from './components/TermsOfService';
+import { AboutUs } from './components/AboutUs';
+import { ContactUs } from './components/ContactUs';
 import {
   convertPdfToDocx,
   getPdfPageCount,
@@ -36,9 +40,23 @@ import {
 
 export const App: React.FC = () => {
   // Path & Routing state
+  const isRecognizedPath = (p: string) => {
+    return [
+      '/',
+      '/pdf-to-docx',
+      '/scanned-pdf-to-word',
+      '/pdf-to-word-no-sign-up',
+      '/es/convertir-pdf-a-word',
+      '/privacy-policy',
+      '/terms-of-service',
+      '/about-us',
+      '/contact',
+    ].includes(p);
+  };
+
   const [currentPath, setCurrentPath] = useState<string>(() => {
     const p = window.location.pathname.replace(/\/$/, '') || '/';
-    return p === '/pdf-to-docx' || p === '/scanned-pdf-to-word' || p === '/pdf-to-word-no-sign-up' || p === '/es/convertir-pdf-a-word' ? p : '/';
+    return isRecognizedPath(p) ? p : '/';
   });
 
   // Theme state
@@ -74,7 +92,7 @@ export const App: React.FC = () => {
   useEffect(() => {
     const handlePopState = () => {
       const p = window.location.pathname.replace(/\/$/, '') || '/';
-      setCurrentPath(p === '/pdf-to-docx' || p === '/scanned-pdf-to-word' || p === '/pdf-to-word-no-sign-up' || p === '/es/convertir-pdf-a-word' ? p : '/');
+      setCurrentPath(isRecognizedPath(p) ? p : '/');
     };
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
@@ -86,7 +104,23 @@ export const App: React.FC = () => {
     let description = 'Convert PDF to Word free online at pdftowordfree.org. No sign up, no email, no trial, 100% private in-browser conversion with instant editable Word (DOCX) download.';
     let canonical = 'https://www.pdftowordfree.org/';
 
-    if (currentPath === '/es/convertir-pdf-a-word') {
+    if (currentPath === '/privacy-policy') {
+      title = 'Privacy Policy - PDFtoWordFree.org';
+      description = 'Read the PDFtoWordFree privacy policy. Learn about our zero-server client-side conversion architecture, cookie usage, Google AdSense disclosures, and GDPR/CCPA compliance.';
+      canonical = 'https://www.pdftowordfree.org/privacy-policy';
+    } else if (currentPath === '/terms-of-service') {
+      title = 'Terms of Service - PDFtoWordFree.org';
+      description = 'Review the PDFtoWordFree terms of service. Understand user agreements, document ownership, acceptable usage, and liability disclaimers for our free online tools.';
+      canonical = 'https://www.pdftowordfree.org/terms-of-service';
+    } else if (currentPath === '/about-us') {
+      title = 'About Us - PDFtoWordFree.org';
+      description = 'Learn about PDFtoWordFree, our mission to democratize free document conversion, our 100% client-side WebAssembly technology, and our team commitments.';
+      canonical = 'https://www.pdftowordfree.org/about-us';
+    } else if (currentPath === '/contact') {
+      title = 'Contact Us - PDFtoWordFree.org';
+      description = 'Get in touch with the PDFtoWordFree team. Reach out for technical support, bug reports, feature requests, or partnership inquiries.';
+      canonical = 'https://www.pdftowordfree.org/contact';
+    } else if (currentPath === '/es/convertir-pdf-a-word') {
       title = 'Convertir PDF a Word Gratis (Sin Registro) - PDFtoWordFree';
       description = 'Convierte PDF a Word (DOCX) gratis online en pdftowordfree.org. Sin registro, sin email y 100% privado en tu navegador con descarga inmediata.';
       canonical = 'https://www.pdftowordfree.org/es/convertir-pdf-a-word';
@@ -292,148 +326,160 @@ export const App: React.FC = () => {
 
       {/* Main Content Area */}
       <main className="flex-1">
-        {/* Hero & Converter Container */}
-        <section id="converter" className="relative pt-10 pb-16 sm:pt-16 sm:pb-24 overflow-hidden">
-          {/* Subtle Ambient Backdrops */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-b from-blue-400/10 via-indigo-400/5 to-transparent blur-3xl pointer-events-none -z-10" />
-
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            {/* Dynamic Title & Badge per Sub-tool */}
-            <div className="text-center mb-10">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-blue-950/70 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 text-xs sm:text-sm font-semibold mb-6 shadow-sm">
-                <Sparkles className="w-4 h-4 text-amber-500" />
-                <span>100% Free • Unlimited • No Registration</span>
-              </div>
-
-              {currentPath === '/es/convertir-pdf-a-word' ? (
-                <>
-                  <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.15]">
-                    Convertir <span className="text-red-500">PDF</span> a{' '}
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500">
-                      Word Online Gratis
-                    </span>
-                  </h1>
-                  <p className="mt-5 text-base sm:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
-                    Convierte tus documentos PDF a archivos Word editables (DOCX) en segundos con total privacidad en el navegador. Sin registro ni límites.
-                  </p>
-                </>
-              ) : currentPath === '/pdf-to-word-no-sign-up' ? (
-                <>
-                  <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.15]">
-                    PDF to Word Converter <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-teal-600 to-blue-600">No Sign Up</span>
-                  </h1>
-                  <p className="mt-5 text-base sm:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
-                    Convert any PDF into editable Word (DOCX) format with zero registration, no email address, and no subscription trials.
-                  </p>
-                </>
-              ) : currentPath === '/pdf-to-docx' ? (
-                <>
-                  <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.15]">
-                    Convert <span className="text-red-500">PDF</span> to{' '}
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500">
-                      DOCX Online
-                    </span>
-                  </h1>
-                  <p className="mt-5 text-base sm:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
-                    Convert any PDF into Microsoft Word Office OpenXML (.docx) format with high accuracy. 100% client-side privacy.
-                  </p>
-                </>
-              ) : currentPath === '/scanned-pdf-to-word' ? (
-                <>
-                  <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.15]">
-                    Convert <span className="text-purple-600 dark:text-purple-400">Scanned PDF</span> to{' '}
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500">
-                      Word (DOCX)
-                    </span>
-                  </h1>
-                  <p className="mt-5 text-base sm:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
-                    Extract selectable text, headings, and tables from scanned documents and images into editable Word files.
-                  </p>
-                </>
-              ) : (
-                <>
-                  <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.15]">
-                    Convert <span className="text-red-500">PDF</span> to{' '}
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500">
-                      Word Online
-                    </span>
-                  </h1>
-                  <p className="mt-5 text-base sm:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
-                    Transform any PDF document into an editable Microsoft Word (DOCX) file with high accuracy. Protected by 100% client-side privacy.
-                  </p>
-                </>
-              )}
-            </div>
-
-            {/* DropZone Section */}
-            <div className="mb-8">
-              <DropZone
-                onFilesSelected={handleFilesSelected}
-                onLoadSample={handleLoadSample}
-                isProcessing={isConvertingAny}
-              />
-            </div>
-
-            {/* Queue & Conversion Action Area */}
-            {queue.length > 0 && (
-              <div className="space-y-4 animate-fadeIn">
-                <BatchActionBar
-                  items={queue}
-                  onConvertAll={handleConvertAll}
-                  onDownloadAllZip={handleDownloadAllZip}
-                  onClearAll={handleClearAll}
-                  isConvertingAny={isConvertingAny}
-                />
-
-                <div className="space-y-3">
-                  {queue.map((item) => (
-                    <FileItemCard
-                      key={item.id}
-                      item={item}
-                      onConvert={handleConvertSingle}
-                      onRemove={handleRemoveFile}
-                      onDownload={downloadDocx}
-                      onPreviewText={(target) => setPreviewItem(target)}
-                      onUpdatePages={handleUpdatePages}
-                    />
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        </section>
-
-        {/* Informative Sub-tool Content Sections */}
-        {currentPath === '/es/convertir-pdf-a-word' ? (
-          <SpanishPageContent />
-        ) : currentPath === '/pdf-to-word-no-sign-up' ? (
-          <>
-            <NoSignUpPageContent />
-            <HowItWorksSection />
-            <ComparisonSection />
-            <FaqSection />
-          </>
-        ) : currentPath === '/pdf-to-docx' ? (
-          <>
-            <DocxPageContent />
-            <HowItWorksSection />
-            <ComparisonSection />
-            <FaqSection />
-          </>
-        ) : currentPath === '/scanned-pdf-to-word' ? (
-          <>
-            <ScannedPageContent />
-            <HowItWorksSection />
-            <FeaturesSection />
-            <FaqSection />
-          </>
+        {currentPath === '/privacy-policy' ? (
+          <PrivacyPolicy />
+        ) : currentPath === '/terms-of-service' ? (
+          <TermsOfService />
+        ) : currentPath === '/about-us' ? (
+          <AboutUs onNavigate={handleNavigate} />
+        ) : currentPath === '/contact' ? (
+          <ContactUs onNavigate={handleNavigate} />
         ) : (
           <>
-            <HowItWorksSection />
-            <FeaturesSection />
-            <ComparisonSection />
-            <SeoContentSection />
-            <FaqSection />
+            {/* Hero & Converter Container */}
+            <section id="converter" className="relative pt-10 pb-16 sm:pt-16 sm:pb-24 overflow-hidden">
+              {/* Subtle Ambient Backdrops */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-b from-blue-400/10 via-indigo-400/5 to-transparent blur-3xl pointer-events-none -z-10" />
+
+              <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                {/* Dynamic Title & Badge per Sub-tool */}
+                <div className="text-center mb-10">
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-blue-950/70 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 text-xs sm:text-sm font-semibold mb-6 shadow-sm">
+                    <Sparkles className="w-4 h-4 text-amber-500" />
+                    <span>100% Free • Unlimited • No Registration</span>
+                  </div>
+
+                  {currentPath === '/es/convertir-pdf-a-word' ? (
+                    <>
+                      <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.15]">
+                        Convertir <span className="text-red-500">PDF</span> a{' '}
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500">
+                          Word Online Gratis
+                        </span>
+                      </h1>
+                      <p className="mt-5 text-base sm:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                        Convierte tus documentos PDF a archivos Word editables (DOCX) en segundos con total privacidad en el navegador. Sin registro ni límites.
+                      </p>
+                    </>
+                  ) : currentPath === '/pdf-to-word-no-sign-up' ? (
+                    <>
+                      <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.15]">
+                        PDF to Word Converter <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-teal-600 to-blue-600">No Sign Up</span>
+                      </h1>
+                      <p className="mt-5 text-base sm:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                        Convert any PDF into editable Word (DOCX) format with zero registration, no email address, and no subscription trials.
+                      </p>
+                    </>
+                  ) : currentPath === '/pdf-to-docx' ? (
+                    <>
+                      <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.15]">
+                        Convert <span className="text-red-500">PDF</span> to{' '}
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500">
+                          DOCX Online
+                        </span>
+                      </h1>
+                      <p className="mt-5 text-base sm:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                        Convert any PDF into Microsoft Word Office OpenXML (.docx) format with high accuracy. 100% client-side privacy.
+                      </p>
+                    </>
+                  ) : currentPath === '/scanned-pdf-to-word' ? (
+                    <>
+                      <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.15]">
+                        Convert <span className="text-purple-600 dark:text-purple-400">Scanned PDF</span> to{' '}
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500">
+                          Word (DOCX)
+                        </span>
+                      </h1>
+                      <p className="mt-5 text-base sm:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                        Extract selectable text, headings, and tables from scanned documents and images into editable Word files.
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.15]">
+                        Convert <span className="text-red-500">PDF</span> to{' '}
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500">
+                          Word Online
+                        </span>
+                      </h1>
+                      <p className="mt-5 text-base sm:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                        Transform any PDF document into an editable Microsoft Word (DOCX) file with high accuracy. Protected by 100% client-side privacy.
+                      </p>
+                    </>
+                  )}
+                </div>
+
+                {/* DropZone Section */}
+                <div className="mb-8">
+                  <DropZone
+                    onFilesSelected={handleFilesSelected}
+                    onLoadSample={handleLoadSample}
+                    isProcessing={isConvertingAny}
+                  />
+                </div>
+
+                {/* Queue & Conversion Action Area */}
+                {queue.length > 0 && (
+                  <div className="space-y-4 animate-fadeIn">
+                    <BatchActionBar
+                      items={queue}
+                      onConvertAll={handleConvertAll}
+                      onDownloadAllZip={handleDownloadAllZip}
+                      onClearAll={handleClearAll}
+                      isConvertingAny={isConvertingAny}
+                    />
+
+                    <div className="space-y-3">
+                      {queue.map((item) => (
+                        <FileItemCard
+                          key={item.id}
+                          item={item}
+                          onConvert={handleConvertSingle}
+                          onRemove={handleRemoveFile}
+                          onDownload={downloadDocx}
+                          onPreviewText={(target) => setPreviewItem(target)}
+                          onUpdatePages={handleUpdatePages}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </section>
+
+            {/* Informative Sub-tool Content Sections */}
+            {currentPath === '/es/convertir-pdf-a-word' ? (
+              <SpanishPageContent />
+            ) : currentPath === '/pdf-to-word-no-sign-up' ? (
+              <>
+                <NoSignUpPageContent />
+                <HowItWorksSection />
+                <ComparisonSection />
+                <FaqSection />
+              </>
+            ) : currentPath === '/pdf-to-docx' ? (
+              <>
+                <DocxPageContent />
+                <HowItWorksSection />
+                <ComparisonSection />
+                <FaqSection />
+              </>
+            ) : currentPath === '/scanned-pdf-to-word' ? (
+              <>
+                <ScannedPageContent />
+                <HowItWorksSection />
+                <FeaturesSection />
+                <FaqSection />
+              </>
+            ) : (
+              <>
+                <HowItWorksSection />
+                <FeaturesSection />
+                <ComparisonSection />
+                <SeoContentSection />
+                <FaqSection />
+              </>
+            )}
           </>
         )}
       </main>

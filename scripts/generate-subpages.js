@@ -56,6 +56,46 @@ const subpages = [
     intro: 'Convierte tus documentos PDF a archivos Word editables (DOCX) en segundos con total privacidad en el navegador. Sin registro ni límites.',
     bodyText: 'Conversor de PDF a Word gratis, rápido y 100% seguro. Convierte documentos PDF a formato Microsoft Word (.docx) editable directamente desde tu navegador sin instalar programas y sin subir archivos a servidores externos.'
   },
+  {
+    dir: 'privacy-policy',
+    title: 'Privacy Policy - PDFtoWordFree.org',
+    metaTitle: 'Privacy Policy - PDFtoWordFree.org',
+    description: 'Read the PDFtoWordFree privacy policy. Learn about our zero-server client-side conversion architecture, cookie usage, Google AdSense disclosures, and GDPR/CCPA compliance.',
+    canonical: 'https://www.pdftowordfree.org/privacy-policy',
+    h1: 'Privacy Policy &bull; <span style="color: #2563eb;">PDFtoWordFree</span>',
+    intro: 'Our zero-server document privacy guarantee. Learn how client-side WebAssembly conversion protects your confidential data, alongside our Google AdSense and cookie disclosures.',
+    bodyText: 'At PDFtoWordFree.org, your files are never uploaded to any remote server. All document text parsing, font baseline extraction, and Word (.docx) generation occur entirely in your local browser memory. We adhere strictly to GDPR, CCPA, and Google AdSense publisher transparency policies.'
+  },
+  {
+    dir: 'terms-of-service',
+    title: 'Terms of Service - PDFtoWordFree.org',
+    metaTitle: 'Terms of Service - PDFtoWordFree.org',
+    description: 'Review the PDFtoWordFree terms of service. Understand user agreements, document ownership, acceptable usage, and liability disclaimers for our free online tools.',
+    canonical: 'https://www.pdftowordfree.org/terms-of-service',
+    h1: 'Terms of Service &bull; <span style="color: #2563eb;">PDFtoWordFree</span>',
+    intro: 'User agreement, document copyright ownership, acceptable usage, and disclaimers for pdftowordfree.org free online document tools.',
+    bodyText: 'By using PDFtoWordFree.org, you retain full and exclusive ownership of all uploaded and converted files. Review our service scope, acceptable usage policy, and liability limitations.'
+  },
+  {
+    dir: 'about-us',
+    title: 'About Us - PDFtoWordFree.org',
+    metaTitle: 'About Us - PDFtoWordFree.org',
+    description: 'Learn about PDFtoWordFree, our mission to democratize free document conversion, our 100% client-side WebAssembly technology, and our team commitments.',
+    canonical: 'https://www.pdftowordfree.org/about-us',
+    h1: 'About <span style="color: #2563eb;">PDFtoWordFree</span>',
+    intro: 'Empowering individuals, students, and businesses worldwide with private, fast, and 100% free document conversion tools without subscriptions or server uploads.',
+    bodyText: 'PDFtoWordFree was built to solve the frustration of paywalls and invasive cloud uploads in document processing. Powered by client-side WebAssembly, our tool processes documents entirely within your device memory with zero latency and 100% confidentiality.'
+  },
+  {
+    dir: 'contact',
+    title: 'Contact Us - PDFtoWordFree.org',
+    metaTitle: 'Contact Us - PDFtoWordFree.org',
+    description: 'Get in touch with the PDFtoWordFree team. Reach out for technical support, bug reports, feature requests, or partnership inquiries.',
+    canonical: 'https://www.pdftowordfree.org/contact',
+    h1: 'Contact <span style="color: #2563eb;">PDFtoWordFree Team</span>',
+    intro: 'Have questions, formatting feedback, or need help with a complex document? Reach out to our engineering and support desk directly.',
+    bodyText: 'Email support@pdftowordfree.org. We respond to all technical inquiries, bug reports, and general feedback within 24 to 48 business hours.'
+  }
 ];
 
 for (const page of subpages) {

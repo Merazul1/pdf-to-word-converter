@@ -15,9 +15,9 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   return (
     <footer className="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 transition-colors py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
           {/* Col 1: Brand & Description */}
-          <div className="md:col-span-2">
+          <div className="sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-3 mb-3">
               <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20">
                 <FileText className="w-5 h-5" />
@@ -30,7 +30,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-sm leading-relaxed mb-4">
               Free, secure, and client-side online converter. Transform PDF documents to editable Microsoft Word (DOCX) files in seconds with zero uploads.
             </p>
-            <div className="inline-flex items-center gap-2 text-xs text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-900 px-3.5 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800">
+            <div className="inline-flex items-center gap-2 text-xs text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-900 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800">
               <ShieldCheck className="w-4 h-4 text-emerald-500 shrink-0" />
               <span>Zero Server Uploads • 100% In-Browser Privacy</span>
             </div>
@@ -90,10 +90,10 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </ul>
           </div>
 
-          {/* Col 3: Resources */}
+          {/* Col 3: Resources & Guides */}
           <div>
             <h4 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white mb-3">
-              Resources & Guide
+              Resources &amp; Guide
             </h4>
             <ul className="space-y-2 text-xs sm:text-sm">
               <li>
@@ -103,7 +103,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </li>
               <li>
                 <a href="#features" className="text-slate-500 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 transition-colors">
-                  Features & Security
+                  Features &amp; Security
                 </a>
               </li>
               <li>
@@ -118,6 +118,51 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </li>
             </ul>
           </div>
+
+          {/* Col 4: Legal & Company (CRITICAL FOR GOOGLE ADSENSE APPROVAL) */}
+          <div>
+            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white mb-3">
+              Company &amp; Legal
+            </h4>
+            <ul className="space-y-2 text-xs sm:text-sm">
+              <li>
+                <a
+                  href="/about-us"
+                  onClick={(e) => handleLink(e, '/about-us')}
+                  className="text-slate-500 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 transition-colors"
+                >
+                  About Us
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/contact"
+                  onClick={(e) => handleLink(e, '/contact')}
+                  className="text-slate-500 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 transition-colors"
+                >
+                  Contact Us
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/privacy-policy"
+                  onClick={(e) => handleLink(e, '/privacy-policy')}
+                  className="text-slate-500 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 transition-colors"
+                >
+                  Privacy Policy
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/terms-of-service"
+                  onClick={(e) => handleLink(e, '/terms-of-service')}
+                  className="text-slate-500 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 transition-colors"
+                >
+                  Terms of Service
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
 
         {/* Bottom Bar */}
@@ -125,10 +170,38 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           <div>
             © {new Date().getFullYear()} <strong className="text-slate-700 dark:text-slate-200">pdftowordfree.org</strong> • Free Online Document Tools.
           </div>
-          <div className="flex items-center gap-4">
-            <span>No Cookies Tracked</span>
+          <div className="flex items-center gap-4 flex-wrap justify-center">
+            <a
+              href="/privacy-policy"
+              onClick={(e) => handleLink(e, '/privacy-policy')}
+              className="hover:underline"
+            >
+              Privacy Policy
+            </a>
             <span>•</span>
-            <span>No Data Retained</span>
+            <a
+              href="/terms-of-service"
+              onClick={(e) => handleLink(e, '/terms-of-service')}
+              className="hover:underline"
+            >
+              Terms of Service
+            </a>
+            <span>•</span>
+            <a
+              href="/about-us"
+              onClick={(e) => handleLink(e, '/about-us')}
+              className="hover:underline"
+            >
+              About
+            </a>
+            <span>•</span>
+            <a
+              href="/contact"
+              onClick={(e) => handleLink(e, '/contact')}
+              className="hover:underline"
+            >
+              Contact
+            </a>
           </div>
         </div>
       </div>
